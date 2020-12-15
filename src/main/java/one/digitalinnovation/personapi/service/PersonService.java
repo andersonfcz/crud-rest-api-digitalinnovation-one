@@ -12,15 +12,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonService {
 
-    PersonRepository personRepository;
-    PersonMapper personMapper = PersonMapper.INSTANCE;
+    @Autowired
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
+    private PersonRepository personRepository;
+
+    private PersonMapper personMapper = PersonMapper.INSTANCE;
 
 
     public MessageResponseDTO createPerson(PersonDTO personDTO) {
